@@ -23,8 +23,7 @@ class CursoController extends Controller
         return redirect()->route('cursos.show', $curso);
     }
 
-    public function show($curso){
-        $curso = Curso::find($curso);
+    public function show(Curso $curso){
         return view('cursos.show', compact('curso'));
     }
 
@@ -32,8 +31,15 @@ class CursoController extends Controller
         return view('cursos.edit', compact('curso'));
     }
 
-    public function update(UpdateCurso $request, Curso $curso){
-        $curso->update($request->all());
+    public function update(Request $request, Curso $curso){
+        // $curso->update($request->all());
+        $request->validate([
+            'name' => 'required|min:3',
+            'slug' => 'required|unique:cursos,slug, ' . $curso->id,
+            'descripcion' => 'required',
+            'categoria' => 'required'
+        ]);
+
         return redirect()->route('cursos.show', $curso);
     }
     

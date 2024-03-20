@@ -20,7 +20,20 @@
             <span>*{{$message}}</span>
             <br>
         @enderror
+        <br>
         
+        <label>
+            Slug:
+            <br>
+            <input type="text" name="slug" value="{{old('slug')}}">
+        </label>
+
+        @error('slug')
+            <br>
+            <span>*{{$message}}</span>
+            <br>
+        @enderror
+
         <br>
         <label>
             Descripcion:
